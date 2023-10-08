@@ -1,4 +1,4 @@
-﻿namespace _3O_Practica05_ProgramacionAvanzada
+﻿namespace _3OLIDST_JulianCastro_005
 {
     partial class Form1
     {

@@ -1,9 +1,9 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace _3O_Practica05_ProgramacionAvanzada
+namespace _3OLIDST_JulianCastro_005
 {
-    //Desactivar advertencia innecesaria
+    //Desactivar advertencias innecesarias
     #pragma warning disable CS8622
     public partial class Form1 : Form
     {
@@ -13,7 +13,6 @@ namespace _3O_Practica05_ProgramacionAvanzada
             InitializeComponent();
             txtEdad.TextChanged += ValidarEdad;
             txtEstatura.TextChanged += ValidarEstatura;
-            txtTelefono.TextChanged += ValidarTelefono;
             txtNombre.TextChanged += ValidarNombre;
             txtApellido.TextChanged += ValidarApellido;
         }
@@ -51,26 +50,34 @@ namespace _3O_Practica05_ProgramacionAvanzada
                 genero = "Mujer";
             }
 
-            if (EsEnteroValido(edad) && EsDecimalValido(estatura) && EsEnteroValido10Digitos(telefono) && EsTextoValido(nombres) && EsTextoValido(apellidos))  
+            if (EsEnteroValido(edad) && EsDecimalValido(estatura) && EsTextoValido(nombres) && EsTextoValido(apellidos))
             {
-                string datos = "Datos guardados con éxito: \nNombre : " + nombres + "\nApellido : " + apellidos + "\nEdad : " + edad + "\nEstatura : " + estatura + "\nTelefono : " + telefono + "\nGenero : " + genero + "\n";
-                MessageBox.Show(datos);
-                string rutaArchivo = "C:/Users/pooll/Documents/Datos.txt";
-                bool archivoExiste = File.Exists(rutaArchivo);
-                if (archivoExiste == false)
+                // Validar longitud del número de teléfono
+                if (telefono.Length == 10 && EsEnteroValido10Digitos(telefono))
                 {
-                    File.WriteAllText(rutaArchivo, datos);
+                    string datos = "Datos guardados con éxito: \nNombre : " + nombres + "\nApellido : " + apellidos + "\nEdad : " + edad + "\nEstatura : " + estatura + "\nTelefono : " + telefono + "\nGenero : " + genero + "\n";
+                    MessageBox.Show(datos);
+                    string rutaArchivo = "C:/Users/pooll/Documents/Datos.txt";
+                    bool archivoExiste = File.Exists(rutaArchivo);
+                    if (archivoExiste == false)
+                    {
+                        File.WriteAllText(rutaArchivo, datos);
+                    }
+                    else
+                    {
+                        using (StreamWriter writer = new StreamWriter(rutaArchivo, true))
+                        {
+                            if (archivoExiste)
+                            {
+                                writer.WriteLine(datos);
+                            }
+
+                        }
+                    }
                 }
                 else
                 {
-                    using (StreamWriter writer = new StreamWriter(rutaArchivo, true))
-                    {
-                        if (archivoExiste)
-                        {
-                            writer.WriteLine(datos);
-                        }
-
-                    }
+                    MessageBox.Show("Por favor ingrese un número de teléfono válido de 10 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else 
@@ -124,24 +131,24 @@ namespace _3O_Practica05_ProgramacionAvanzada
             }
         }
 
-        private void ValidarTelefono(object sender, EventArgs e)
-        {
-            TextBox textbox = (TextBox)sender;
-            string input = textbox.Text;
+        //private void ValidarTelefono(object sender, EventArgs e)
+        //{
+        //    TextBox textbox = (TextBox)sender;
+        //    string input = textbox.Text;
 
-            if (input.Length > 10)
-            {
-                if (!EsEnteroValido10Digitos(textbox.Text))
-                {
-                    MessageBox.Show("Por favor ingrese un número de teléfono válido de 10 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textbox.Clear();
-                }
-            }
-            else if (!EsEnteroValido10Digitos(input))
-            {
-                MessageBox.Show("Por favor ingrese un número de teléfono válido de 10 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //    if (input.Length > 10)
+        //    {
+        //        if (!EsEnteroValido10Digitos(input))
+        //        {
+        //            MessageBox.Show("Por favor ingrese un número de teléfono válido de 10 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            textbox.Clear();
+        //        }
+        //    }
+        //    else if (!EsEnteroValido10Digitos(input))
+        //    {
+        //        MessageBox.Show("Por favor ingrese un número de teléfono válido de 10 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         private void ValidarNombre(object sender, EventArgs e)
         {
