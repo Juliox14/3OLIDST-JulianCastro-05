@@ -1,5 +1,6 @@
 using System.IO;
 using System.Text.RegularExpressions;
+using MySql.Data.MySqlClient;
 
 namespace _3OLIDST_JulianCastro_005
 {
@@ -7,6 +8,7 @@ namespace _3OLIDST_JulianCastro_005
     #pragma warning disable CS8622
     public partial class Form1 : Form
     {
+        string conexionSQL = "Server=localhost;Port==3306;Database=Formulario_Datos";
 
         public Form1()
         {
