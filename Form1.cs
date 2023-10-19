@@ -8,7 +8,7 @@ namespace _3OLIDST_JulianCastro_005
     #pragma warning disable CS8622
     public partial class Form1 : Form
     {
-        string conexionSQL = "Server=localhost;Port==3306;Database=Formulario_Datos";
+        string conexionSQL = "Server=localhost;Port=3306;Database=Formulario_Datos;Uid=root;Pwd=martinteto04;";
 
         public Form1()
         {
@@ -18,7 +18,29 @@ namespace _3OLIDST_JulianCastro_005
             txtNombre.TextChanged += ValidarNombre;
             txtApellido.TextChanged += ValidarApellido;
         }
+        private void InsertarRegistro(string nombre, string apellido,string telefono , decimal estatura, int edad , string genero)
+        {
+            using (MySqlConnection conection = new MySqlConnection(conexionSQL))
+            {
+                conection.Open();
 
+                string insertQuery = "INSERT INTO datos (Nombre, Apellidos, Telefono, Estatura, Edad, Genero) " +
+                    "VALUES (@Nombre, @Apellidos, @Telefono, @Estatura, @Edad, @Genero)";
+                using (MySqlCommand command = new MySqlCommand(insertQuery, conection))
+                {
+                    command.Parameters.AddWithValue("@Nombre", nombre);
+                    command.Parameters.AddWithValue("@Apellidos", apellido);
+                    command.Parameters.AddWithValue("@Telefono", telefono);
+                    command.Parameters.AddWithValue("@Estatura", estatura);
+                    command.Parameters.AddWithValue("@Edad", edad);
+                    command.Parameters.AddWithValue("@Genero", genero);
+
+                    command.ExecuteNonQuery();
+                    
+                }
+                conection.Close();
+            }
+        }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             // Limpiar los controles después de guardar
@@ -71,9 +93,17 @@ namespace _3OLIDST_JulianCastro_005
                         {
                             if (archivoExiste)
                             {
-                                writer.WriteLine(datos);
-                            }
 
+                                writer.WriteLine();
+                                InsertarRegistro(nombres, apellidos, telefono, decimal.Parse(estatura), int.Parse(edad), genero);
+                                Console.WriteLine("Datos ingresados correctamente");
+                            }
+                            else
+                            {
+                                writer.WriteLine(datos);
+                                InsertarRegistro(nombres, apellidos, telefono, decimal.Parse(estatura), int.Parse(edad), genero);
+                                Console.WriteLine("Datos ingresados correctamente");
+                            }
                         }
                     }
                 }
@@ -102,10 +132,17 @@ namespace _3OLIDST_JulianCastro_005
             return decimal.TryParse(valor, out resultado);
         }
 
-        private bool EsEnteroValido10Digitos(string valor)
+        private bool EsEnteroValido10Digitos(string input)
         {
-            long resultado;
-            return long.TryParse(valor, out resultado) && valor.Length == 10;
+            if(input.Length!=10)
+            {
+                return false;
+            }
+            if(!input.All(char.IsDigit))
+            { 
+                return false;
+            }
+            return true;
         }
 
         private bool EsTextoValido(string valor)
