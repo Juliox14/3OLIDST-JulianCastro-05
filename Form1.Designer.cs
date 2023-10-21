@@ -49,6 +49,7 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
+            lblNombre.ForeColor = SystemColors.ControlLightLight;
             lblNombre.Location = new Point(85, 60);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(71, 20);
@@ -58,6 +59,7 @@
             // lblApellido
             // 
             lblApellido.AutoSize = true;
+            lblApellido.ForeColor = SystemColors.ControlLightLight;
             lblApellido.Location = new Point(85, 107);
             lblApellido.Name = "lblApellido";
             lblApellido.Size = new Size(73, 20);
@@ -67,6 +69,7 @@
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
+            lblTelefono.ForeColor = SystemColors.ControlLightLight;
             lblTelefono.Location = new Point(85, 151);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(74, 20);
@@ -76,6 +79,7 @@
             // lblEstatura
             // 
             lblEstatura.AutoSize = true;
+            lblEstatura.ForeColor = SystemColors.ControlLightLight;
             lblEstatura.Location = new Point(86, 207);
             lblEstatura.Name = "lblEstatura";
             lblEstatura.Size = new Size(73, 20);
@@ -85,6 +89,7 @@
             // lblEdad
             // 
             lblEdad.AutoSize = true;
+            lblEdad.ForeColor = SystemColors.ControlLightLight;
             lblEdad.Location = new Point(96, 251);
             lblEdad.Name = "lblEdad";
             lblEdad.Size = new Size(50, 20);
@@ -131,6 +136,7 @@
             // 
             gpGenero.Controls.Add(rbtnMujer);
             gpGenero.Controls.Add(rbtnHombre);
+            gpGenero.ForeColor = SystemColors.ControlLightLight;
             gpGenero.Location = new Point(417, 72);
             gpGenero.Name = "gpGenero";
             gpGenero.Size = new Size(335, 125);
@@ -184,6 +190,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(31, 29, 43);
             ClientSize = new Size(800, 519);
             Controls.Add(btnLimpiar);
             Controls.Add(btnGuardar);

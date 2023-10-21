@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 namespace _3OLIDST_JulianCastro_005
 {
     //Desactivar advertencias innecesarias
-    #pragma warning disable CS8622
+#pragma warning disable CS8622
     public partial class Form1 : Form
     {
         string conexionSQL = "Server=localhost;Port=3306;Database=Formulario_Datos;Uid=root;Pwd=martinteto04;";
@@ -18,7 +18,7 @@ namespace _3OLIDST_JulianCastro_005
             txtNombre.TextChanged += ValidarNombre;
             txtApellido.TextChanged += ValidarApellido;
         }
-        private void InsertarRegistro(string nombre, string apellido,string telefono , decimal estatura, int edad , string genero)
+        private void InsertarRegistro(string nombre, string apellido, string telefono, decimal estatura, int edad, string genero)
         {
             using (MySqlConnection conection = new MySqlConnection(conexionSQL))
             {
@@ -36,7 +36,7 @@ namespace _3OLIDST_JulianCastro_005
                     command.Parameters.AddWithValue("@Genero", genero);
 
                     command.ExecuteNonQuery();
-                    
+
                 }
                 conection.Close();
             }
@@ -79,7 +79,8 @@ namespace _3OLIDST_JulianCastro_005
                 // Validar longitud del número de teléfono
                 if (telefono.Length == 10 && EsEnteroValido10Digitos(telefono))
                 {
-                    string datos = "Datos guardados con éxito: \nNombre : " + nombres + "\nApellido : " + apellidos + "\nEdad : " + edad + "\nEstatura : " + estatura + "\nTelefono : " + telefono + "\nGenero : " + genero + "\n";
+                    string datos = "Datos guardados con éxito: \nNombre : " + nombres + "\nApellido : " + apellidos + "\nEdad : " + edad + 
+                        "\nEstatura : " + estatura + "\nTelefono : " + telefono + "\nGenero : " + genero + "\n";
                     MessageBox.Show(datos);
                     string rutaArchivo = "C:/Users/pooll/Documents/Datos.txt";
                     bool archivoExiste = File.Exists(rutaArchivo);
@@ -112,12 +113,12 @@ namespace _3OLIDST_JulianCastro_005
                     MessageBox.Show("Por favor ingrese un número de teléfono válido de 10 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else 
+            else
             {
                 MessageBox.Show("Por favor ingrese datos válidos en los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-            
+
         }
 
         private bool EsEnteroValido(string valor)
@@ -134,12 +135,12 @@ namespace _3OLIDST_JulianCastro_005
 
         private bool EsEnteroValido10Digitos(string input)
         {
-            if(input.Length!=10)
+            if (input.Length != 10)
             {
                 return false;
             }
-            if(!input.All(char.IsDigit))
-            { 
+            if (!input.All(char.IsDigit))
+            {
                 return false;
             }
             return true;
@@ -169,25 +170,6 @@ namespace _3OLIDST_JulianCastro_005
                 textbox.Clear();
             }
         }
-
-        //private void ValidarTelefono(object sender, EventArgs e)
-        //{
-        //    TextBox textbox = (TextBox)sender;
-        //    string input = textbox.Text;
-
-        //    if (input.Length > 10)
-        //    {
-        //        if (!EsEnteroValido10Digitos(input))
-        //        {
-        //            MessageBox.Show("Por favor ingrese un número de teléfono válido de 10 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //            textbox.Clear();
-        //        }
-        //    }
-        //    else if (!EsEnteroValido10Digitos(input))
-        //    {
-        //        MessageBox.Show("Por favor ingrese un número de teléfono válido de 10 dígitos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
 
         private void ValidarNombre(object sender, EventArgs e)
         {
