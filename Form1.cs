@@ -9,7 +9,7 @@ namespace _3OLIDST_JulianCastro_005
     public partial class Form1 : Form
     {
         string conexionSQL = "Server=localhost;Port=3306;Database=Formulario_Datos;Uid=root;Pwd=martinteto04;";
-
+        bool valid = false;
         public Form1()
         {
             InitializeComponent();
@@ -43,6 +43,7 @@ namespace _3OLIDST_JulianCastro_005
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            valid = false;
             // Limpiar los controles después de guardar
             txtNombre.Clear();
             txtApellido.Clear();
@@ -52,7 +53,7 @@ namespace _3OLIDST_JulianCastro_005
             rbtnHombre.Checked = false;
             rbtnMujer.Checked = false;
         }
-        bool valid=false;
+       
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             // obtener los datos de los TextBox
