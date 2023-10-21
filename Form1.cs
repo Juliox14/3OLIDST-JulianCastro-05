@@ -52,10 +52,11 @@ namespace _3OLIDST_JulianCastro_005
             rbtnHombre.Checked = false;
             rbtnMujer.Checked = false;
         }
-
+        bool valid=false;
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             // obtener los datos de los TextBox
+            valid = true;
 
             string nombres = txtNombre.Text;
             string apellidos = txtApellido.Text;
@@ -153,41 +154,53 @@ namespace _3OLIDST_JulianCastro_005
 
         private void ValidarEdad(object sender, EventArgs e)
         {
-            TextBox textbox = (TextBox)sender;
-            if (!EsEnteroValido(textbox.Text))
-            {
-                MessageBox.Show("Por favor ingrese una edad válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textbox.Clear();
+            if (valid == true) 
+            { 
+                TextBox textbox = (TextBox)sender;
+                if (!EsEnteroValido(textbox.Text))
+                {
+                    MessageBox.Show("Por favor ingrese una edad válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textbox.Clear();
+                }
             }
         }
 
         private void ValidarEstatura(object sender, EventArgs e)
         {
-            TextBox textbox = (TextBox)sender;
-            if (!EsDecimalValido(textbox.Text))
+            if (valid == true)
             {
-                MessageBox.Show("Por favor ingrese una estatura válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textbox.Clear();
+                TextBox textbox = (TextBox)sender;
+                if (!EsDecimalValido(textbox.Text))
+                {
+                    MessageBox.Show("Por favor ingrese una estatura válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textbox.Clear();
+                }
             }
         }
 
         private void ValidarNombre(object sender, EventArgs e)
         {
-            TextBox textbox = (TextBox)sender;
-            if (!EsTextoValido(textbox.Text))
+            if (valid == true)
             {
-                MessageBox.Show("Por favor ingrese un nombre válido (solo letras y espacios).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textbox.Clear();
+                TextBox textbox = (TextBox)sender;
+                if (!EsTextoValido(textbox.Text))
+                {
+                    MessageBox.Show("Por favor ingrese un nombre válido (solo letras y espacios).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textbox.Clear();
+                }
             }
         }
 
         private void ValidarApellido(object sender, EventArgs e)
         {
-            TextBox textbox = (TextBox)sender;
-            if (!EsTextoValido(textbox.Text))
+            if (valid == true)
             {
-                MessageBox.Show("Por favor ingrese apellidos válidos (solo letras y espacios).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textbox.Clear();
+                TextBox textbox = (TextBox)sender;
+                if (!EsTextoValido(textbox.Text))
+                {
+                    MessageBox.Show("Por favor ingrese apellidos válidos (solo letras y espacios).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textbox.Clear();
+                }
             }
         }
 
